@@ -499,11 +499,11 @@ $essentialtweaks.Add_Click({
     Enable-ComputerRestore -Drive "C:\"
     Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
-    Write-Host "Running O&O Shutup with Recommended Settings"
-	Import-Module BitsTransfer
-	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
-	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
-	./OOSU10.exe ooshutup10.cfg /quiet
+#    Write-Host "Running O&O Shutup with Recommended Settings"
+#	Import-Module BitsTransfer
+#	Start-BitsTransfer -Source "https://raw.githubusercontent.com/ChrisTitusTech/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
+#	Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
+#	./OOSU10.exe ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
@@ -585,21 +585,21 @@ $essentialtweaks.Add_Click({
     Write-Host "Disabling Shared Experiences..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableCdp" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableMmx" -Type DWord -Value 0
-    Write-Host "Disabling Remote Assistance..."
-	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Type DWord -Value 0
+#    Write-Host "Disabling Remote Assistance..."
+#	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Type DWord -Value 0
     Write-Host "Disabling Storage Sense..."
 	Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" -Recurse -ErrorAction SilentlyContinue
     Write-Host "Stopping and disabling Superfetch service..."
 	Stop-Service "SysMain" -WarningAction SilentlyContinue
 	Set-Service "SysMain" -StartupType Disabled
-    Write-Host "Setting BIOS time to UTC..."
-	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
-    Write-Host "Disabling Hibernation..."
-	Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 0
-	If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings")) {
-		New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 0
+#    Write-Host "Setting BIOS time to UTC..."
+#	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
+#    Write-Host "Disabling Hibernation..."
+#	Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 0
+#	If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings")) {
+#		New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" | Out-Null
+#	}
+#	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 0
     Write-Host "Showing task manager details..."
 	$taskmgr = Start-Process -WindowStyle Hidden -FilePath taskmgr.exe -PassThru
 	Do {
@@ -614,8 +614,8 @@ $essentialtweaks.Add_Click({
 		New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" | Out-Null
 	}
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Name "EnthusiastMode" -Type DWord -Value 1
-    Write-Host "Hiding Task View button..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
+#    Write-Host "Hiding Task View button..."
+#	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
     Write-Host "Hiding People icon..."
 	If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People")) {
 		New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" | Out-Null
@@ -623,16 +623,15 @@ $essentialtweaks.Add_Click({
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 0
     Write-Host "Showing all tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
-	Write-Host "Enabling NumLock after startup..."
-	If (!(Test-Path "HKU:")) {
-		New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS | Out-Null
-	}
-	Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 2147483650
-	Add-Type -AssemblyName System.Windows.Forms
-	If (!([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
-		$wsh = New-Object -ComObject WScript.Shell
-		$wsh.SendKeys('{NUMLOCK}')
-	}
+#	Write-Host "Enabling NumLock after startup..."
+#	If (!(Test-Path "HKU:")) {
+#		New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS | Out-Null
+#	}
+#	Set-ItemProperty -Path "HKU:\.DEFAULT\Control Panel\Keyboard" -Name "InitialKeyboardIndicators" -Type DWord -Value 2147483650
+##	If (!([System.Windows.Forms.Control]::IsKeyLocked('NumLock'))) {
+#		$wsh = New-Object -ComObject WScript.Shell
+#		$wsh.SendKeys('{NUMLOCK}')
+#	}
 
     Write-Host "Changing default Explorer view to This PC..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
@@ -698,14 +697,15 @@ $Bloatware = @(
         "*HiddenCityMysteryofShadows*"
         "*Hulu*"
         "*HiddenCity*"
-        "*AdobePhotoshopExpress*"
+		"*AdobePhotoshopExpress*"
+		"*Mixed Reality Portal*"
                      
         #Optional: Typically not removed but you can if you need to for some reason
         #"*Microsoft.Advertising.Xaml_10.1712.5.0_x64__8wekyb3d8bbwe*"
         #"*Microsoft.Advertising.Xaml_10.1712.5.0_x86__8wekyb3d8bbwe*"
-        #"*Microsoft.BingWeather*"
+        "*Microsoft.BingWeather*"
         #"*Microsoft.MSPaint*"
-        #"*Microsoft.MicrosoftStickyNotes*"
+        "*Microsoft.MicrosoftStickyNotes*"
         #"*Microsoft.Windows.Photos*"
         #"*Microsoft.WindowsCalculator*"
         #"*Microsoft.WindowsStore*"

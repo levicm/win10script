@@ -5,9 +5,17 @@ choco install -y Firefox
 choco install -y NotepadPlusPlus
 choco install -y FoxitReader
 choco install -y adobereader
+choco install -y office365proplus
 choco install -y 7zip
 choco install -y dropbox
 choco install -y Spotify
 choco install -y git
 choco install -y vscode
 choco install -y etcher
+choco install -y ccleaner
+choco install -y hwinfo
+choco install -y speedtest
+choco install -y virtualbox
+choco install -y vmware-workstation-player
+choco install -y scrcpy
+

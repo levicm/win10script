@@ -1,7 +1,7 @@
 # win10script
 This is the Ultimate Windows 10 Script from a creation from multiple debloat scripts and gists from github. I also added Chocolatey and other tools to the script that I install on every machine.
 
-## My Additions
+## Chris Titus Additions
 
 - Dark Mode
 - One Command to launch and run
@@ -27,4 +27,9 @@ Comment any thing you don't want out... Example:
 ### Security Tweaks ###
 	"SetUACHigh",
 	"EnableSMB1",
+```
+# win10initapps
+To install Chocolatey and initial apps, copy the script below and run on a PowerShell window:
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')); win10initapps;
 ```

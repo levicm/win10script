@@ -1,5 +1,6 @@
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 choco install -y microsoft-windows-terminal
+choco install -y autohotkey
 choco install -y GoogleChrome
 choco install -y Firefox
 choco install -y NotepadPlusPlus
@@ -18,4 +19,5 @@ choco install -y speedtest
 choco install -y virtualbox
 choco install -y vmware-workstation-player
 choco install -y scrcpy
+choco install -y sketchbook
 

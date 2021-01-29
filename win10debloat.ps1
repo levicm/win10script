@@ -240,7 +240,8 @@ $securityhigh.location           = New-Object System.Drawing.Point(244,119)
 $securityhigh.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',15,[System.Drawing.FontStyle]([System.Drawing.FontStyle]::Bold))
 
 $Label5                          = New-Object system.Windows.Forms.Label
-$Label5.text                     = "- Set UAC to Never Prompt"
+#$Label5.text                     = "- Set UAC to Never Prompt"
+$Label5.text                     = "-"
 $Label5.AutoSize                 = $true
 $Label5.width                    = 150
 $Label5.height                   = 10
@@ -272,7 +273,8 @@ $Label8.location                 = New-Object System.Drawing.Point(24,75)
 $Label8.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label9                          = New-Object system.Windows.Forms.Label
-$Label9.text                     = "- Disable Meltdown Flag"
+#$Label9.text                     = "- Disable Meltdown Flag"
+$Label9.text                     = "-"
 $Label9.AutoSize                 = $true
 $Label9.width                    = 150
 $Label9.height                   = 10
@@ -280,7 +282,8 @@ $Label9.location                 = New-Object System.Drawing.Point(24,58)
 $Label9.Font                     = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label10                         = New-Object system.Windows.Forms.Label
-$Label10.text                    = "- Set UAC to Always Prompt"
+#$Label10.text                    = "- Set UAC to Always Prompt"
+$Label10.text                    = "-"
 $Label10.AutoSize                = $true
 $Label10.width                   = 25
 $Label10.height                  = 10
@@ -304,7 +307,8 @@ $Label12.location                = New-Object System.Drawing.Point(233,6)
 $Label12.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $Label13                         = New-Object system.Windows.Forms.Label
-$Label13.text                    = "- Enable Meltdown Flag"
+#$Label13.text                    = "- Enable Meltdown Flag"
+$Label13.text                    = "-"
 $Label13.AutoSize                = $true
 $Label13.width                   = 25
 $Label13.height                  = 10
@@ -799,9 +803,9 @@ $cortana.Add_Click({
 })
 
 $securitylow.Add_Click({ 
-    Write-Host "Lowering UAC level..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 0
+#    Write-Host "Lowering UAC level..."
+#	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 0
+#	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 0
     Write-Host "Disabling Windows Defender..."
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Force | Out-Null
@@ -818,8 +822,8 @@ $securitylow.Add_Click({
 	}
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SpynetReporting" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -Type DWord -Value 2
-    Write-Host "Disabling Meltdown (CVE-2017-5754) compatibility flag..."
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat" -Name "cadca5fe-87d3-4b96-b7fb-a231484277cc" -ErrorAction SilentlyContinue
+#    Write-Host "Disabling Meltdown (CVE-2017-5754) compatibility flag..."
+#	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat" -Name "cadca5fe-87d3-4b96-b7fb-a231484277cc" -ErrorAction SilentlyContinue
     Write-Host "Disabling Malicious Software Removal Tool offering..."
 	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\MRT")) {
 		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\MRT" | Out-Null
@@ -829,9 +833,9 @@ $securitylow.Add_Click({
 })
 
 $securityhigh.Add_Click({ 
-    Write-Host "Raising UAC level..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 5
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 1
+#    Write-Host "Raising UAC level..."
+#	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ConsentPromptBehaviorAdmin" -Type DWord -Value 5
+#	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "PromptOnSecureDesktop" -Type DWord -Value 1
     Write-Host "Disabling SMB 1.0 protocol..."
 	Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force
     Write-Host "Enabling Windows Defender..."
@@ -846,11 +850,11 @@ $securityhigh.Add_Click({
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" -Name "SubmitSamplesConsent" -ErrorAction SilentlyContinue
     Write-Host "Disabling Windows Script Host..."
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows Script Host\Settings" -Name "Enabled" -Type DWord -Value 0
-    Write-Host "Enabling Meltdown (CVE-2017-5754) compatibility flag..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat")) {
-		New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat" | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat" -Name "cadca5fe-87d3-4b96-b7fb-a231484277cc" -Type DWord -Value 0
+#    Write-Host "Enabling Meltdown (CVE-2017-5754) compatibility flag..."
+#	If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat")) {
+#		New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat" | Out-Null
+#	}
+#	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\QualityCompat" -Name "cadca5fe-87d3-4b96-b7fb-a231484277cc" -Type DWord -Value 0
     Write-Host "Enabling Malicious Software Removal Tool offering..."
 	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\MRT" -Name "DontOfferThroughWUAU" -ErrorAction SilentlyContinue
 	$wshell.Popup("Operation Completed",0,"Done",0x0)

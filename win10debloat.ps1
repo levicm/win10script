@@ -675,6 +675,7 @@ $Bloatware = @(
         "Microsoft.WindowsSoundRecorder"
         "Microsoft.ZuneMusic"
         "Microsoft.ZuneVideo"
+        "Microsoft.YourPhone"
 
         #Sponsored Windows 10 AppX Apps
         #Add sponsored/featured apps to remove in the "*AppName*" format
@@ -688,9 +689,11 @@ $Bloatware = @(
         "*Wunderlist*"
         "*Flipboard*"
         "*Twitter*"
+        "*Pinterest*"
         "*Facebook*"
         "*Royal Revolt*"
         "*Sway*"
+        "*Roblox*"
         "*Speed Test*"
         "*Dolby*"
         "*Viber*"

@@ -21,3 +21,6 @@ choco install -y sketchbook
 choco install -y office365proplus
 choco install -y virtualbox
 choco install -y vmware-workstation-player
+choco install -y bitwarden
+choco install -y vlc
+choco install -y cutepdf
